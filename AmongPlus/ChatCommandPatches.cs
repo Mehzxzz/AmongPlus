@@ -30,8 +30,10 @@ public static class ChatCommandPatches
             {
                 var pl = PluginSingleton<AmongPlusPlugin>.Instance;
                 var player = PlayerControl.LocalPlayer;
-                var name = player.Data.PlayerName.WithoutRichText();
-                
+
+                pl.Config.Reload();
+                var baseName = pl.Name.Value == "Change This" ? player.Data.PlayerName.WithoutRichText() : pl.Name.Value;
+                var name = baseName.Length > 12 ? baseName[..12] : baseName;
                 ColorUtility.TryParseHtmlString(pl.StartColour.Value, out var start);
                 ColorUtility.TryParseHtmlString(pl.MidColour.Value, out var mid);
                 ColorUtility.TryParseHtmlString(pl.EndColour.Value, out var end);
