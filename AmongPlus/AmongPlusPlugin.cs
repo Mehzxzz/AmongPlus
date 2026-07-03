@@ -15,6 +15,7 @@ public class AmongPlusPlugin : BasePlugin
 {
     private Harmony Harmony { get; } = new(AmongPlusPluginInfo.Id);
 
+    public ConfigEntry<string> Name { get; private set; }
     public ConfigEntry<string> StartColour { get; private set; }
     public ConfigEntry<string> MidColour { get; private set; }
     public ConfigEntry<string> EndColour { get; private set; }
@@ -23,6 +24,7 @@ public class AmongPlusPlugin : BasePlugin
 
     public override void Load()
     {
+        Name = Config.Bind("Name", "Name Text", "Change This");
         StartColour = Config.Bind("Name", "Start Colour", "#ffffff");
         MidColour = Config.Bind("Name", "Middle Colour", "#ffffff");
         EndColour = Config.Bind("Name", "End Colour", "#ffffff");
