@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <DebugType>embedded</DebugType>
+
+        <Description>Amogus</Description>
+        <Authors>Mehzxzz</Authors>
+
+        <GenerateDependencyFile>false</GenerateDependencyFile>
+
+        <PathMap>$(MSBuildProjectDirectory)=/AmongPlus</PathMap>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="TownOfUsMira" Version="1.6.2" />
+        <PackageReference Include="Reactor" Version="2.5.0-ci.371" />
+        <PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.735" Private="false" ExcludeAssets="runtime;native" />
+        <PackageReference Include="AmongUs.GameLibs.Android" Version="2026.3.17" />
+
+        <PackageReference Include="BepInEx.AutoPlugin" Version="1.1.0" PrivateAssets="all" />
+        <PackageReference Include="BepInEx.IL2CPP.MSBuild" Version="2.0.1" PrivateAssets="all" ExcludeAssets="runtime" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="Resources\**\*" />
+    </ItemGroup>
+
+    <Target Name="CopyToPlugins" AfterTargets="Build" Condition="'$(AuProfile)' != ''">
+        <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="$(AuProfile)\BepInEx\plugins" />
+    </Target>
+
+    <Target Name="WarnMissingAuProfile" AfterTargets="Build" Condition="'$(AuProfile)' == ''">
+        <Warning Text="Missing AuProfile. If you are building from source, create a file named $(MSBuildProjectName).csproj.user file with your bepinex plugins path in this directory." />
+        <Warning Text="&lt;Project&gt;" />
+        <Warning Text="    &lt;PropertyGroup&gt;" />
+        <Warning Text="        &lt;AuProfile&gt;Path to your plugins folder&lt;/AuProfile&gt;" />
+        <Warning Text="    &lt;/PropertyGroup&gt;" />
+        <Warning Text="&lt;/Project&gt;" />
+    </Target>
+</Project>
