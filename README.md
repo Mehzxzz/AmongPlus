@@ -5,6 +5,10 @@
 # AmongPlus
 **A mod that allows you to edit your name colour (including gradients)!**
 
+# Features
+- Allows you to edit your name & name colour to include colours & gradients
+- Allows you to remove other's coloured names, to let you see things such as haunter and snitch roles in Tou Mira properly (as of 1.0.1)
+
 -----------------------
 
 # How to use
