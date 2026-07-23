@@ -33,11 +33,15 @@ public static class PlayerJoinPatch
         pl.Config.Reload();
         var baseName = pl.Name.Value == "Change This" ? player.Data.PlayerName.WithoutRichText() : pl.Name.Value;
         var name = baseName.Length > 12 ? baseName[..12] : baseName;
-        ColorUtility.TryParseHtmlString(pl.StartColour.Value, out var start);
-        ColorUtility.TryParseHtmlString(pl.MidColour.Value, out var mid);
-        ColorUtility.TryParseHtmlString(pl.EndColour.Value, out var end);
-        string gradient = AmongPlusPlugin.GetGradient(name, start, mid, end);
-                
-        player.CmdCheckName(gradient);
+
+        if (pl.StartColour.Value != "#ffffff" && pl.MidColour.Value != "#ffffff" && pl.EndColour.Value != "#ffffff")
+        {
+            ColorUtility.TryParseHtmlString(pl.StartColour.Value, out var start);
+            ColorUtility.TryParseHtmlString(pl.MidColour.Value, out var mid);
+            ColorUtility.TryParseHtmlString(pl.EndColour.Value, out var end);
+            string gradient = AmongPlusPlugin.GetGradient(name, start, mid, end);
+
+            player.CmdCheckName(gradient);
+        }
     }
 }

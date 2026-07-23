@@ -3,7 +3,9 @@ using BepInEx.Configuration;
 using BepInEx.Logging;
 using BepInEx.Unity.IL2CPP;
 using HarmonyLib;
+using MiraAPI.PluginLoading;
 using Reactor;
+using Reactor.Utilities;
 using UnityEngine;
 
 namespace AmongPlus;
@@ -11,7 +13,7 @@ namespace AmongPlus;
 [BepInPlugin(AmongPlusPluginInfo.Id, AmongPlusPluginInfo.Name, AmongPlusPluginInfo.Version)]
 [BepInProcess("Among Us.exe")]
 [BepInDependency(ReactorPlugin.Id)]
-public class AmongPlusPlugin : BasePlugin
+public class AmongPlusPlugin : BasePlugin, IMiraPlugin
 {
     private Harmony Harmony { get; } = new(AmongPlusPluginInfo.Id);
 
@@ -24,6 +26,8 @@ public class AmongPlusPlugin : BasePlugin
 
     public override void Load()
     {
+        ReactorCredits.Register(AmongPlusPluginInfo.Name, AmongPlusPluginInfo.Version, AmongPlusPluginInfo.IsPreRelease, ReactorCredits.AlwaysShow);
+        
         Name = Config.Bind("Name", "Name Text", "Change This");
         StartColour = Config.Bind("Name", "Start Colour", "#ffffff");
         MidColour = Config.Bind("Name", "Middle Colour", "#ffffff");
@@ -46,4 +50,11 @@ public class AmongPlusPlugin : BasePlugin
         }
         return result;
     }
+
+    public ConfigFile GetConfigFile()
+    {
+        return Config;
+    }
+
+    public string OptionsTitleText => "Among Plus";
 }
