@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using HarmonyLib;
 using MiraAPI.GameOptions;
 using TownOfUs.Utilities;
-using UnityEngine;
 
 namespace AmongPlus;
 
@@ -27,7 +25,7 @@ public static class AntiRichTextNamePatch
         if (!AmongUsClient.Instance.AmHost) return;
         if (!OptionGroupSingleton<HostOptions>.Instance.ClearRichTextTags) return;
 
-        MiscUtils.AddFakeChat(PlayerControl.LocalPlayer.Data, $"<color=#D53F42>Anticheat Warning</color>", $"{name}'s name contains Unity Rich Text Tags! Their name has been reset to default text.", true, altColors:true);
+        MiscUtils.AddFakeChat(PlayerControl.LocalPlayer.Data, "<color=#D53F42>Anticheat Warning</color>", $"{name}'s name contains Unity Rich Text Tags! Their name has been reset to default text.", true, altColors:true);
         __instance.CmdCheckName(name.WithoutRichText());
     }
 }
