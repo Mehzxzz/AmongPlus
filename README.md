@@ -1,3 +1,5 @@
+**AmongPlus has been archived. It will no longer receive updates. This is due to Tou-Mira adding a new setting to disable rich text tags which make the mod no longer work in most lobbies.**
+
 > [!NOTE]
 > This repo is an extension mod for [Town of Us: Mira](https://github.com/AU-Avengers/TOU-Mira).\
 > This mod requires Town of Us: Mira to be installed and ONLY works on modded servers.
